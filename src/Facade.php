@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  * @package Qmas\KeywordAnalytics
  *
  * @method static Analysis fromRequest()
- * @method static Analysis run(string $keyword = '', string $title = '', string $description = '', string $html = '', string $url = '')
+ * @method static Analysis run(string $keyword = '', string $title = '', string $description = '', string $seo_title = '', string $html = '', string $url = '')
  */
 class Facade extends BaseFacade
 {

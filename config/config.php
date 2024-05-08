@@ -32,6 +32,18 @@ return [
             'max' => 2
         ],
 
+         // Defines the valid length (count by characters) of the meta seo_title
+         'seo_title_length' => [
+            'min' => 140,
+            'max' => 160
+        ],
+
+         // Determine the allowed number of occurrences of the keyword in the meta seo_title
+         'keyword_in_seo_title' => [
+            'min' => 1,
+            'max' => 2
+        ],
+
         // Defines the valid length (count by words) of the article content
         'content_length' => [
             'min' => 300
@@ -90,13 +102,14 @@ return [
      * The following configuration is used when you want to run analysis from request input
      * without give any data.
      *
-     * Example, with the default configuration, if the request key contains `keyword`, `html`, `meta_description`, `headline`, `url` then
+     * Example, with the default configuration, if the request key contains `keyword`, `html`, `meta_description`, `meta_title`, `headline`, `url` then
      * you can run analytics instantly by Analytics::fromRequest()->run()->getResults();
      */
     'request_keys' => [
         'keyword'       => 'keyword',
         'html'          => 'html',
         'description'   => 'meta_description',
+        'seo_title'   => 'meta_title',
         'title'         => 'headline',
         'url'           => 'url'
     ],

@@ -30,6 +30,8 @@ class CheckingMessage
 
     const DESCRIPTION_FIELD = 'metaDescription';
 
+    const SEOTITLE_FIELD = 'metaTitle';
+
     const HTML_FIELD = 'html';
 
     const URL_FIELD = 'url';

@@ -8,10 +8,12 @@ use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
 use Qmas\KeywordAnalytics\Checkers\CheckContentLength;
 use Qmas\KeywordAnalytics\Checkers\CheckDescriptionLength;
+use Qmas\KeywordAnalytics\Checkers\CheckSEOTitleLength;
 use Qmas\KeywordAnalytics\Checkers\CheckHeadingInContent;
 use Qmas\KeywordAnalytics\Checkers\CheckImageInContent;
 use Qmas\KeywordAnalytics\Checkers\CheckKeywordDensity;
 use Qmas\KeywordAnalytics\Checkers\CheckKeywordInDescription;
+use Qmas\KeywordAnalytics\Checkers\CheckKeywordInSEOTitle;
 use Qmas\KeywordAnalytics\Checkers\CheckKeywordInFirstParagraph;
 use Qmas\KeywordAnalytics\Checkers\CheckKeywordInHeading;
 use Qmas\KeywordAnalytics\Checkers\CheckKeywordInImgAlt;
@@ -36,6 +38,9 @@ class Analysis
 
     /** @var string $description */
     protected $description;
+
+    /** @var string $seo_title */
+    protected $seo_title;
 
     /** @var string $url */
     protected $url;
@@ -87,6 +92,7 @@ class Analysis
             Request::input(config('keyword-analytics.request_keys.keyword')),
             Request::input(config('keyword-analytics.request_keys.title')),
             Request::input(config('keyword-analytics.request_keys.description')),
+            Request::input(config('keyword-analytics.request_keys.seo_title')),
             Request::input(config('keyword-analytics.request_keys.html')),
             Request::input(config('keyword-analytics.request_keys.url'))
         );
@@ -100,6 +106,7 @@ class Analysis
      * @param string|null $keyword
      * @param string|null $title
      * @param string|null $description
+     * @param string|null $seo_title
      * @param string|null $html
      * @param string|null $url
      * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
@@ -114,6 +121,7 @@ class Analysis
         string $keyword = null,
         string $title = null,
         string $description = null,
+        string $seo_title = null,
         string $html = null,
         string $url = null
     ) {
@@ -124,6 +132,7 @@ class Analysis
         $this->keyword      = Helper::unicodeToAscii($keyword);
         $this->title        = Helper::unicodeToAscii($title);
         $this->description  = Helper::unicodeToAscii($description);
+        $this->seo_title  = Helper::unicodeToAscii($seo_title);
         $this->url          = Helper::unicodeToAscii(str_replace(['-', '_', '/'], ' ', $url));
         $this->html         = $this->stripUnnecessaryTags($html);
         $this->content      = Helper::unicodeToAscii(Helper::stripHtmlTags($this->html));
@@ -199,12 +208,13 @@ class Analysis
         string $keyword = '',
         string $title = '',
         string $description = '',
+        string $seo_title = '',
         string $html = '',
         string $url = ''
     ): Analysis
     {
         if (! $this->isFromRequest) {
-            $this->prepareData($keyword, $title, $description, $html, $url);
+            $this->prepareData($keyword, $title, $description, $seo_title, $html, $url);
         }
 
         $this->checkKeywordLength()
@@ -212,6 +222,8 @@ class Analysis
             ->checkKeywordInTitle()
             ->checkDescriptionLength()
             ->checkKeywordInDescription()
+            ->checkSEOTitleLength()
+            ->checkKeywordInSEOTitle()
             ->checkContentLength()
             ->checkKeywordInFirstParagraph()
             ->checkHeadingInContent()
@@ -274,6 +286,28 @@ class Analysis
 
             $this->results = $this->results->concat($result);
         }
+
+        return $this;
+    }
+
+    protected function checkKeywordInSEOTitle(): Analysis
+    {
+        if ($this->title) {
+            $checker = new CheckKeywordInSEOTitle($this->keyword, $this->title);
+            $result = $checker->check()->getResult();
+
+            $this->results = $this->results->concat($result);
+        }
+
+        return $this;
+    }
+
+    protected function checkSEOTitleLength(): Analysis
+    {
+        $checker = new CheckDescriptionLength($this->title);
+        $result = $checker->check()->getResult();
+
+        $this->results = $this->results->concat($result);
 
         return $this;
     }
