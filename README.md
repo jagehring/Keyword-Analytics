@@ -13,6 +13,7 @@ Analyze keywords in the content and make diagnostics to improve the seo score of
 - Check keyword in title.
 - Check keyword in first paragraph of content.
 - Check keyword in meta description.
+- Check keyword in meta title.
 - Check images in content.
 - Check keyword in ALT attribute of image tags.
 - Check links in content.
@@ -43,7 +44,7 @@ Analyze keywords in the content and make diagnostics to improve the seo score of
 You can install the package via composer:
 
 ```bash
-composer require r94ever/laravel-keyword-analytics
+composer require jagehring/laravel-keyword-analytics
 ```
 
 #### For Laravel
@@ -104,7 +105,7 @@ dd($results);
 ```php
 use Qmas\KeywordAnalytics\Analysis;
 
-$results = app(Analysis::class)->run($keyword, $title, $description, $html, $url)->getResults();
+$results = app(Analysis::class)->run($keyword, $title, $description, $seo_title, $html, $url)->getResults();
 
 dd($results);
 ```
@@ -139,7 +140,7 @@ If you discover any security related issues, please email vandt147@outlook.com i
 
 ## Credits
 
--   [r94ever](https://github.com/r94ever)
+-   [jagehring](https://github.com/jagehring)
 
 ## License
 
