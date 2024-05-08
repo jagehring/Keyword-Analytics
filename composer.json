@@ -1,5 +1,5 @@
 {
-    "name": "r94ever/laravel-keyword-analytics",
+    "name": "jagehring/laravel-keyword-analytics",
     "description": "Analyze keywords in the content and make diagnostics to improve the seo score of the content.",
     "keywords": [
         "r94ever",
@@ -7,7 +7,7 @@
         "seo",
         "laravel-seo"
     ],
-    "homepage": "https://github.com/r94ever/Keyword-Analytics",
+    "homepage": "https://github.com/jagehring/Keyword-Analytics",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -22,7 +22,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-        "paquettg/php-html-parser": "^3.1"
+        "jagehring/php-html-parser": "^3.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5.8|^9.0|^10.1|^11.0"
