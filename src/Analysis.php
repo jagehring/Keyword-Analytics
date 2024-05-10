@@ -222,7 +222,6 @@ class Analysis
             ->checkKeywordInTitle()
             ->checkDescriptionLength()
             ->checkKeywordInDescription()
-            ->checkSEOTitleLength()
             ->checkKeywordInSEOTitle()
             ->checkContentLength()
             ->checkKeywordInFirstParagraph()

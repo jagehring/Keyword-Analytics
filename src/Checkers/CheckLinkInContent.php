@@ -72,7 +72,7 @@ class CheckLinkInContent extends Checker
             CheckingMessage::WARNING_TYPE,
             CheckingMessage::HTML_FIELD,
             CheckingMessage::NO_LINKS_FOUND_MSG_ID,
-            __('No Links found. Please consider to add some outgoing links.'),
+            __('No Links found. Please consider adding some outgoing links.'),
             CheckingMessage::OUTBOUND_LINKS_VALIDATOR,
             ["min" => $this->min, "linkCount" => 0]
         ))->build();
@@ -84,7 +84,7 @@ class CheckLinkInContent extends Checker
             CheckingMessage::WARNING_TYPE,
             CheckingMessage::HTML_FIELD,
             CheckingMessage::NO_LINKS_FOUND_MSG_ID,
-            __('We found :count links. Please consider to add more at least :remain outgoing links.', [
+            __('We found :count links. Please consider adding more at least :remain outgoing links.', [
                 'count' => $this->linksCount,
                 'remain' => $this->min - $this->linksCount
             ]),

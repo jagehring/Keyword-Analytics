@@ -73,7 +73,7 @@ class CheckImageInContent extends Checker
             CheckingMessage::WARNING_TYPE,
             CheckingMessage::HTML_FIELD,
             CheckingMessage::NO_IMAGE_MSG_ID,
-            __('No image found in content. Please consider to add at least :min images to your content.', ['min' => $this->min]),
+            __('No image found in content. Please consider adding at least :min images to your content.', ['min' => $this->min]),
             CheckingMessage::IMAGE_COUNT_VALIDATOR,
             ['min' => $this->min, 'imageCount' => $this->imagesCount]
         ))->build();

@@ -52,7 +52,7 @@ class CheckDescriptionLength extends Checker
             CheckingMessage::IGNORED_TYPE,
             CheckingMessage::DESCRIPTION_FIELD,
             CheckingMessage::IGNORE_MSG_ID,
-            __('Please consider to add some content to meta description tag.'),
+            __('Please consider adding some content to meta description tag.'),
             CheckingMessage::LENGTH_VALIDATOR,
             [
                 "length" => 0,
